@@ -21,8 +21,6 @@ Built for the [Vercel AI Gateway Hackathon](https://ai-gateway-game-hackathon.ve
 - **GPT-4o** (OpenAI)
 - **Claude Sonnet 4** (Anthropic)
 - **Gemini 2.5 Pro** (Google)
-- **Llama 3.3 70B** (Meta)
-- **Mistral Large** (Mistral AI)
 - **Grok 3** (xAI)
 
 ## 🛠️ Tech Stack
