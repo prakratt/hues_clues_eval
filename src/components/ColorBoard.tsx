@@ -76,14 +76,22 @@ export default function ColorBoard({
               const isHovered = coord === hoveredCell;
 
               let zoneStyle = {};
-              if (showZones && !isTarget) {
-                if (isInner) {
+              if (showZones) {
+                if (isTarget) {
                   zoneStyle = {
-                    boxShadow: "inset 0 0 0 3px rgba(234, 179, 8, 0.7)",
+                    outline: "3px solid #000",
+                    outlineOffset: "-1px",
+                  };
+                } else if (isInner) {
+                  zoneStyle = {
+                    outline: "2px solid #000",
+                    outlineOffset: "-1px",
+                    backgroundColor: hex,
                   };
                 } else if (isOuter) {
                   zoneStyle = {
-                    boxShadow: "inset 0 0 0 2px rgba(249, 115, 22, 0.5)",
+                    outline: "1px solid rgba(0,0,0,0.5)",
+                    outlineOffset: "-1px",
                   };
                 }
               }
@@ -169,26 +177,27 @@ export default function ColorBoard({
       {/* Legend */}
       <div className="flex flex-wrap items-center gap-6 mt-4 text-sm text-gray-500">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-gray-400 flex items-center justify-center rounded">
-            <span className="text-xs font-bold text-green-600 bg-white/90 rounded px-1">
-              3
-            </span>
+          <div 
+            className="w-6 h-6 bg-gray-300 flex items-center justify-center"
+            style={{ outline: "3px solid #000", outlineOffset: "-1px" }}
+          >
+            <span className="text-xs font-bold bg-white/90 px-1 rounded text-green-600">3</span>
           </div>
           <span>Target (3 pts)</span>
         </div>
         <div className="flex items-center gap-2">
           <div
-            className="w-6 h-6 bg-gray-300 rounded"
-            style={{ boxShadow: "inset 0 0 0 3px rgba(234, 179, 8, 0.7)" }}
+            className="w-6 h-6 bg-gray-300"
+            style={{ outline: "2px solid #000", outlineOffset: "-1px" }}
           />
-          <span>Inner (2 pts)</span>
+          <span>Inner 3×3 (2 pts)</span>
         </div>
         <div className="flex items-center gap-2">
           <div
-            className="w-6 h-6 bg-gray-300 rounded"
-            style={{ boxShadow: "inset 0 0 0 2px rgba(249, 115, 22, 0.5)" }}
+            className="w-6 h-6 bg-gray-300"
+            style={{ outline: "1px solid rgba(0,0,0,0.5)", outlineOffset: "-1px" }}
           />
-          <span>Outer (1 pt)</span>
+          <span>Outer ring (1 pt)</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-gray-600 border-2 border-white" />

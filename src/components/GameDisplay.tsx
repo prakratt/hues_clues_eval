@@ -107,6 +107,11 @@ export default function GameDisplay() {
                   setRoundData(prev => prev ? { ...prev, clue: data.clue } : null);
                   break;
 
+                case "clue_error":
+                  setIsClueGiverThinking(false);
+                  setRoundData(prev => prev ? { ...prev, clue: `ERROR: ${data.error}` } : null);
+                  break;
+
                 case "guesser_thinking":
                   // Model is thinking (visual handled by board)
                   break;

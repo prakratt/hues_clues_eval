@@ -1,6 +1,6 @@
 import { generateText } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import { getColorByCoordinate, ROWS, COLOR_MAP, getRandomClue } from "@/lib/colorMap";
+import { getColorByCoordinate, ROWS, COLOR_MAP } from "@/lib/colorMap";
 import { calculateScore } from "@/lib/scoring";
 import { MODELS, ModelConfig } from "@/lib/models";
 import type { ScoreResult } from "@/lib/scoring";
@@ -153,14 +153,15 @@ export async function GET(request: Request) {
         let clueReasoning: string | null = null;
 
         if (clueResponse.error || !clueResponse.text) {
-          clue = getRandomClue().word;
+          // Show error - no fallback
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({
-            type: "clue_generated",
+            type: "clue_error",
             round: round + 1,
-            clue,
-            reasoning: "(Fallback clue)",
-            error: clueResponse.error,
+            error: clueResponse.error || "No response from model",
           })}\n\n`));
+          // Skip to next round
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          continue;
         } else {
           const parsed = parseClueResponse(clueResponse.text);
           clue = parsed.clue || "Mystery";
