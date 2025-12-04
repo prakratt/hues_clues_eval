@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 Hues & Cues AI Battle
 
-## Getting Started
+A live AI model evaluation game inspired by the board game [Hues and Cues](https://boardgamegeek.com/boardgame/320451/hues-and-cues). Watch 6 different AI models compete to guess colors from single-word clues!
 
-First, run the development server:
+Built for the [Vercel AI Gateway Hackathon](https://ai-gateway-game-hackathon.vercel.app/submit).
+
+![Hues & Cues AI Battle](https://img.shields.io/badge/AI%20Gateway-Hackathon-blue)
+
+## 🎮 How It Works
+
+1. A random color clue is selected (e.g., "Banana", "Sky", "Ruby")
+2. 6 AI models simultaneously receive the clue and must guess the coordinate on a 480-color board
+3. Models are scored based on grid proximity to the target:
+   - **3 points**: Exact match (center)
+   - **2 points**: Within the 3×3 square around the target
+   - **1 point**: On the boundary (5×5 minus 3×3)
+   - **0 points**: Outside the scoring zone
+
+## 🤖 Competing Models
+
+- **GPT-4o** (OpenAI)
+- **Claude Sonnet 4** (Anthropic)
+- **Gemini 2.5 Pro** (Google)
+- **Llama 3.3 70B** (Meta)
+- **Mistral Large** (Mistral AI)
+- **Grok 3** (xAI)
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **AI Integration**: [Vercel AI SDK](https://ai-sdk.dev) + [AI Gateway](https://vercel.com/ai-gateway)
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- [Vercel AI Gateway API Key](https://vercel.com/ai-gateway)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/hues-clues-ai-battle.git
+cd hues-clues-ai-battle
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local and add your AI Gateway API key
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the game.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+AI_GATEWAY_API_KEY=your_api_key_here
+```
 
-## Learn More
+Get your API key from [Vercel AI Gateway](https://vercel.com/ai-gateway).
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── page.tsx          # Main page (Server Component)
+│   ├── layout.tsx        # Root layout
+│   └── globals.css       # Global styles
+├── components/
+│   ├── GameDisplay.tsx   # Main game UI (Client Component)
+│   ├── ColorBoard.tsx    # 480-color board visualization
+│   └── ModelCard.tsx     # Individual model result cards
+└── lib/
+    ├── colorMap.ts       # 480-color grid data + clue dictionary
+    ├── scoring.ts        # Grid-based scoring system
+    ├── gameLogic.ts      # Server action for running the game
+    ├── models.ts         # AI model configurations
+    └── types.ts          # TypeScript interfaces
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Scoring System
 
-## Deploy on Vercel
+The scoring follows the official Hues and Cues rules:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- A **3×3 scoring frame** is centered on the target color
+- **Exact match** (center): 3 points
+- **Inner ring** (8 surrounding cells): 2 points  
+- **Outer ring** (boundary, 16 cells): 1 point
+- **Miss** (outside): 0 points
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Color Board
+
+The board consists of 480 colors arranged in a 20×24 grid:
+
+- **Rows A-T**: Control brightness/saturation
+  - A-E: Lighter, pastel colors
+  - F-O: Vivid, saturated colors
+  - P-T: Darker, deeper colors
+- **Columns 1-24**: Control hue
+  - Transitions through: Reds → Oranges → Yellows → Greens → Teals → Blues → Purples → Magentas
+
+## 📜 License
+
+MIT
+
+## 🙏 Acknowledgments
+
+- [Hues and Cues](https://boardgamegeek.com/boardgame/320451/hues-and-cues) by USAopoly
+- [Vercel AI SDK](https://ai-sdk.dev)
+- [Vercel AI Gateway](https://vercel.com/ai-gateway)
