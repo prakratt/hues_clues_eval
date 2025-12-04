@@ -90,7 +90,7 @@ async function queryModel(modelId: string, prompt: string): Promise<{ text: stri
     const { text } = await generateText({
       model: gateway.chatModel(modelId),
       prompt,
-      maxTokens: 200,
+      maxOutputTokens: 200,
       temperature: 0.7,
     });
     return { text, error: null, responseTime: Date.now() - startTime };
