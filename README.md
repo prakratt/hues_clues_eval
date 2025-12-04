@@ -1,10 +1,8 @@
 # 🎨 Hues & Cues AI Battle
 
-A live AI model evaluation game inspired by the board game [Hues and Cues](https://boardgamegeek.com/boardgame/320451/hues-and-cues). Watch 6 different AI models compete to guess colors from single-word clues!
+A live AI model evaluation game inspired by the board game Hues and Clues. Watch 4 different AI models compete to guess colors from single-word clues!
 
-Built for the [Vercel AI Gateway Hackathon](https://ai-gateway-game-hackathon.vercel.app/submit).
-
-![Hues & Cues AI Battle](https://img.shields.io/badge/AI%20Gateway-Hackathon-blue)
+Built for the Vercel AI Gateway Hackathon
 
 ## 🎮 How It Works
 
@@ -109,9 +107,3 @@ The board consists of 480 colors arranged in a 20×24 grid:
 ## 📜 License
 
 MIT
-
-## 🙏 Acknowledgments
-
-- [Hues and Cues](https://boardgamegeek.com/boardgame/320451/hues-and-cues) by USAopoly
-- [Vercel AI SDK](https://ai-sdk.dev)
-- [Vercel AI Gateway](https://vercel.com/ai-gateway)
